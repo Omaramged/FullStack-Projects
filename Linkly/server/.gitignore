@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# env (example stays committed)
+.env
+!.env.example
+.env.local
+
+# logs
+npm-debug.log*
+*.log
+logs/
+
+# test coverage
+coverage/
