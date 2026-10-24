@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAF9F6;
+  --foreground: #191919;
+  --primary-accent: #416B57;
+  --accent-hover: #315441;
+  --surface: #FFFFFF;
+  --border-subtle: #E8E5DF;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
