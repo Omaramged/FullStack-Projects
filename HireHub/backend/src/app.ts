@@ -6,6 +6,11 @@ import morgan from "morgan";
 import { env } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler";
 import authRoutes from "./modules/auth/auth.routes";
+import companyRoutes from "./modules/companies/company.routes";
+import jobRoutes from "./modules/jobs/job.routes";
+import applicationRoutes from "./modules/applications/application.routes";
+import savedJobRoutes from "./modules/savedJobs/savedJob.routes";
+import notificationRoutes from "./modules/notifications/notification.routes";
 
 const app = express();
 
@@ -29,6 +34,11 @@ app.get("/api/v1/health", (_req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/companies", companyRoutes);
+app.use("/api/v1", jobRoutes);
+app.use("/api/v1", applicationRoutes);
+app.use("/api/v1", savedJobRoutes);
+app.use("/api/v1", notificationRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
