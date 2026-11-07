@@ -10,8 +10,8 @@ export default function Home() {
         Find jobs, apply, and manage your recruitment process.
       </p>
       <div className="flex gap-3">
-        <Button render={<Link href="/jobs" />}>Browse Jobs</Button>
-        <Button variant="outline" render={<Link href="/login" />}>
+        <Button nativeButton={false} render={<Link href="/jobs" />}>Browse Jobs</Button>
+        <Button nativeButton={false} variant="outline" render={<Link href="/login" />}>
           Sign In
         </Button>
       </div>
