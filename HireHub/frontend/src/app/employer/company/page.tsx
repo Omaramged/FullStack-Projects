@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Building2 } from "lucide-react";
 
 export default function CompanyPage() {
   const [id, setId] = useState<string | null>(null);
@@ -43,8 +44,7 @@ export default function CompanyPage() {
         setMessage("Company updated.");
       } else {
         const res = (await createCompany(data)) as { data?: { _id?: string } };
-        const c = res.data;
-        if (c?._id) setId(c._id);
+        if (res.data?._id) setId(res.data._id);
         setMessage("Company created.");
       }
     } catch (err) {
@@ -55,33 +55,51 @@ export default function CompanyPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-2xl">
-      <Card>
-        <CardHeader><CardTitle>Company Profile</CardTitle></CardHeader>
+    <div className="container mx-auto px-6 py-10 max-w-2xl space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Company profile</h1>
+        <p className="text-muted-foreground">Tell candidates about your company.</p>
+      </div>
+      <Card className="border-border/60 shadow-sm">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Building2 className="h-5 w-5" />
+            </div>
+            <div>
+              <CardTitle>{id ? "Edit company" : "Create company"}</CardTitle>
+              <CardDescription>Your public company information.</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label>Name</Label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} required />
+              <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Acme Inc." />
             </div>
             <div className="space-y-2">
               <Label>Description</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder="What does your company do?" />
             </div>
-            <div className="space-y-2">
-              <Label>Industry</Label>
-              <Input value={industry} onChange={(e) => setIndustry(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>Location</Label>
-              <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Industry</Label>
+                <Input value={industry} onChange={(e) => setIndustry(e.target.value)} placeholder="Software" />
+              </div>
+              <div className="space-y-2">
+                <Label>Location</Label>
+                <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Remote / NYC" />
+              </div>
             </div>
             <div className="space-y-2">
               <Label>Website</Label>
-              <Input value={website} onChange={(e) => setWebsite(e.target.value)} />
+              <Input value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="https://..." />
             </div>
-            {message && <p className="text-sm text-primary">{message}</p>}
-            <Button type="submit" disabled={loading}>{loading ? "Saving..." : "Save"}</Button>
+            {message && <p className="text-sm text-primary font-medium">{message}</p>}
+            <Button type="submit" disabled={loading} className="w-full sm:w-auto">
+              {loading ? "Saving..." : "Save changes"}
+            </Button>
           </form>
         </CardContent>
       </Card>
