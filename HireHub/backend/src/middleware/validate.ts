@@ -10,7 +10,11 @@ export function validate(schema: ZodSchema, source: "body" | "query" | "params" 
       res.status(400).json(errorResponse(message));
       return;
     }
-    req[source] = result.data;
+    if (source === "query") {
+      Object.assign(req.query, result.data);
+    } else {
+      req[source] = result.data;
+    }
     next();
   };
 }

@@ -33,6 +33,6 @@ const userSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-userSchema.index({ email: 1 }, { unique: true });
+// email uniqueness is enforced by the unique: true on the schema field above
 
 export const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);

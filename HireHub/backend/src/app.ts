@@ -35,7 +35,7 @@ app.get("/api/v1/health", (_req, res) => {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/companies", companyRoutes);
-app.use("/api/v1", jobRoutes);
+app.use("/api/v1/jobs", jobRoutes);
 app.use("/api/v1", applicationRoutes);
 app.use("/api/v1", savedJobRoutes);
 app.use("/api/v1", notificationRoutes);
