@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { authenticate } from "../../middleware/authenticate";
+import * as bookingController from "./booking.controller";
+const router = Router();
+router.post("/bookings", authenticate, ...bookingController.create);
+router.get("/bookings/my-bookings", authenticate, ...bookingController.myBookings);
+router.get("/bookings/:id", authenticate, bookingController.getById);
+router.put("/bookings/:id/cancel", authenticate, ...bookingController.cancel);
+router.post("/organizer/check-in", authenticate, ...bookingController.checkIn);
+router.get("/organizer/events/:id/attendees", authenticate, ...bookingController.attendees);
+export default router;

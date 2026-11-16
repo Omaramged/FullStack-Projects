@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { authenticate } from "../../middleware/authenticate";
+import * as eventController from "./event.controller";
+const router = Router();
+router.get("/", eventController.list);
+router.get("/organizer/mine", authenticate, ...eventController.listMine);
+router.get("/:id", eventController.getById);
+router.post("/", authenticate, ...eventController.create);
+router.put("/:id", authenticate, ...eventController.update);
+router.delete("/:id", authenticate, ...eventController.remove);
+router.post("/:id/ticket-types", authenticate, ...eventController.createTicketType);
+export default router;

@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { authenticate } from "../../middleware/authenticate";
+import * as adminController from "./admin.controller";
+const router = Router();
+router.get("/admin/stats", authenticate, ...adminController.stats);
+router.get("/admin/users", authenticate, ...adminController.users);
+router.get("/admin/events", authenticate, ...adminController.events);
+router.delete("/admin/users/:id", authenticate, ...adminController.deleteUser);
+router.delete("/admin/events/:id", authenticate, ...adminController.deleteEvent);
+export default router;
